@@ -1,0 +1,22 @@
+image: Visual Studio 2022
+
+branches:
+  only:
+    - main
+
+environment:
+  nodejs_version: 18
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm ci
+
+build_script:
+  - npm run build
+
+test_script:
+  - npm test
+
+artifacts:
+  - path: dist\**
+    name: dist
