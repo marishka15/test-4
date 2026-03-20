@@ -1,24 +1,21 @@
-// e2e/e2e.server.js
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const config = require('../webpack.config.js'); // ← .js важно!
+const config = require('../webpack.config');
 
 const compiler = webpack(config);
-const devServerOptions = { ...config.devServer, open: false, hot: false };
-const server = new WebpackDevServer(devServerOptions, compiler);
+const server = new WebpackDevServer({
+  port: 9000,
+  host: 'localhost',
+  open: false,
+}, compiler);
 
 (async () => {
-  await server.start();
-  if (process.send) process.send('ok');
+  try {
+    await server.start();
+    if (process.send) {
+      process.send('ok');
+    }
+  } catch (err) {
+    process.exit(1);
+  }
 })();
-
-// Завершение при получении сигнала
-process.on('SIGTERM', async () => {
-  await server.stop();
-  process.exit(0);
-});
-
-process.on('SIGINT', async () => {
-  await server.stop();
-  process.exit(0);
-});

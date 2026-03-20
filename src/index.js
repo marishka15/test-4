@@ -1,13 +1,17 @@
 import './css/styles.css';
 import { luhnCheck } from './js/cardValidator';
 import { getCardSystem } from './js/cardSystem';
+import visa from '/src/img/visa.png'
+import mastercard from '/src/img/mastercard.png'
+import mir from '/src/img/mir.png'
+import jcb from '/src/img/jcb.png'
 
 // Определяем список платёжных систем и их свойства
 const paymentSystems = [
-  { id: 'visa', name: 'Visa' },
-  { id: 'mastercard', name: 'Mastercard' },
-  { id: 'mir', name: 'Mir' },
-  { id: 'jcb', name: 'JCB' },
+  { id: 'visa', name: 'Visa', src: visa},
+  { id: 'mastercard', name: 'Mastercard', src: mastercard},
+  { id: 'mir', name: 'Mir', src: mir},
+  { id: 'jcb', name: 'JCB', src: jcb},
 ];
 
 // Динамически создаём блок с логотипами
@@ -18,7 +22,7 @@ function createLogoContainer() {
 
   paymentSystems.forEach(system => {
     const img = document.createElement('img');
-    img.src = `./img/${system.id}.png`;
+    img.src = system.src;
     img.alt = system.name;
     img.className = 'logo';
     img.dataset.system = system.id;

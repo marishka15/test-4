@@ -20,12 +20,9 @@ body {
 #checkBtn { 
     padding:8px 12px; 
 }
-#logos img { 
-  width: 80px;
-  height: 50px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: 1px solid #ddd; /* чтобы увидеть границы */
-}
 
+.logo {
+  width: 40px;
+  height: 30px; 
+  border: 1px solid #ddd; 
+}
