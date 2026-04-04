@@ -6,14 +6,13 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "test": "jest /tests",
+    "test": "jest /tests --testEnvironment=jsdom",
     "e2e": "jest e2e/e2e.test.js --runInBand",
     "predeploy": "npm run build",
     "eslint": "npm run lint",
     "deploy": "echo 'Deploy handled by GH Actions or actions-gh-pages'"
   },
   "jest": {
-    "testEnvironment": "jsdom",
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
       "\\.(png|jpg|jpeg|gif|svg)$": "<rootDir>/tests/__mocks__/fileMock.js"
