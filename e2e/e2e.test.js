@@ -1,27 +1,29 @@
-const puppeteer = require('puppeteer'); // Исправлена опечатка и импорт
-const { fork } = require('child_process');
-const path = require('path');
+const puppeteer = require("puppeteer"); // Исправлена опечатка и импорт
+const { fork } = require("child_process");
+const path = require("path");
 
-jest.setTimeout(60000); 
+jest.setTimeout(60000);
 
-describe('Credit Card Validator form', () => {
+describe("Credit Card Validator form", () => {
   let browser = null;
   let page = null;
   let server = null;
-  const baseUrl = 'http://localhost:9000';
+  const baseUrl = "http://localhost:9000";
 
   beforeAll(async () => {
-    server = fork(path.join(__dirname, 'e2e.server.js'));
-    
+    server = fork(path.join(__dirname, "e2e.server.js"));
+
     await new Promise((resolve, reject) => {
-      server.on('message', (msg) => { if (msg === 'ok') resolve(); });
-      server.on('error', reject);
+      server.on("message", (msg) => {
+        if (msg === "ok") resolve();
+      });
+      server.on("error", reject);
     });
 
     browser = await puppeteer.launch({
-      headless: 'new',
+      headless: "new",
     });
-    
+
     page = await browser.newPage();
   });
 
@@ -34,8 +36,9 @@ describe('Credit Card Validator form', () => {
     }
   });
 
-  test('should add do something', async () => {
+  test("should add do something", async () => {
     await page.goto(baseUrl);
-    await page.waitForSelector('body'); 
+    const body = await page.waitForSelector("body");
+    expect(body).not.toBeNull();
   });
 });

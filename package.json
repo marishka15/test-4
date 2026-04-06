@@ -8,8 +8,7 @@
     "build": "webpack --mode production",
     "test": "jest /tests --testEnvironment=jsdom",
     "e2e": "jest e2e/e2e.test.js --runInBand",
-    "predeploy": "npm run build",
-    "eslint": "npm run lint",
+    "lint": "eslint . --fix",
     "deploy": "echo 'Deploy handled by GH Actions or actions-gh-pages'"
   },
   "jest": {

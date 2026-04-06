@@ -1,6 +1,6 @@
 // Алгоритм Луна
 export function luhnCheck(cardNumber) {
-  const digits = cardNumber.replace(/\D/g, '').split('').map(Number);
+  const digits = cardNumber.replace(/\D/g, "").split("").map(Number);
   let sum = 0;
   let isEven = false;
 
@@ -16,4 +16,3 @@ export function luhnCheck(cardNumber) {
 
   return sum % 10 === 0;
 }
-

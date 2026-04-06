@@ -1,30 +1,30 @@
-import './css/styles.css';
-import { luhnCheck } from './js/cardValidator';
-import { getCardSystem } from './js/cardSystem';
-import visa from '/src/img/visa.png'
-import mastercard from '/src/img/mastercard.png'
-import mir from '/src/img/mir.png'
-import jcb from '/src/img/jcb.png'
+import "./css/styles.css";
+import { luhnCheck } from "./js/cardValidator";
+import { getCardSystem } from "./js/cardSystem";
+import visa from "/src/img/visa.png";
+import mastercard from "/src/img/mastercard.png";
+import mir from "/src/img/mir.png";
+import jcb from "/src/img/jcb.png";
 
 // Определяем список платёжных систем и их свойства
 const paymentSystems = [
-  { id: 'visa', name: 'Visa', src: visa},
-  { id: 'mastercard', name: 'Mastercard', src: mastercard},
-  { id: 'mir', name: 'Mir', src: mir},
-  { id: 'jcb', name: 'JCB', src: jcb},
+  { id: "visa", name: "Visa", src: visa },
+  { id: "mastercard", name: "Mastercard", src: mastercard },
+  { id: "mir", name: "Mir", src: mir },
+  { id: "jcb", name: "JCB", src: jcb },
 ];
 
 // Динамически создаём блок с логотипами
 function createLogoContainer() {
-  const container = document.getElementById('logo-container');
-  const logosDiv = document.createElement('div');
-  logosDiv.className = 'card-logos';
+  const container = document.getElementById("logo-container");
+  const logosDiv = document.createElement("div");
+  logosDiv.className = "card-logos";
 
-  paymentSystems.forEach(system => {
-    const img = document.createElement('img');
+  paymentSystems.forEach((system) => {
+    const img = document.createElement("img");
     img.src = system.src;
     img.alt = system.name;
-    img.className = 'logo';
+    img.className = "logo";
     img.dataset.system = system.id;
     logosDiv.append(img);
   });
@@ -34,37 +34,37 @@ function createLogoContainer() {
 
 // Ищем все логотипы (уже после их вставки в DOM)
 function getLogoElements() {
-  return document.querySelectorAll('.logo');
+  return document.querySelectorAll(".logo");
 }
 
 // Сброс активного логотипа
 function resetLogos(logos) {
-  logos.forEach(img => img.classList.remove('active'));
+  logos.forEach((img) => img.classList.remove("active"));
 }
 
 // Подсветка нужного логотипа
 function highlightLogo(logos, system) {
   resetLogos(logos);
-  const logo = Array.from(logos).find(img => img.dataset.system === system);
+  const logo = Array.from(logos).find((img) => img.dataset.system === system);
   if (logo) {
-    logo.classList.add('active');
+    logo.classList.add("active");
   }
 }
 
 // Инициализация приложения
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   createLogoContainer();
 
-  const input = document.getElementById('card-number');
-  const validateBtn = document.getElementById('validate-btn');
-  const result = document.getElementById('validation-result');
+  const input = document.getElementById("card-number");
+  const validateBtn = document.getElementById("validate-btn");
+  const result = document.getElementById("validation-result");
   const logos = getLogoElements(); // логотипы уже в DOM
 
-  validateBtn.addEventListener('click', () => {
+  validateBtn.addEventListener("click", () => {
     const value = input.value.trim();
     if (!value) {
-      result.textContent = 'Please enter a card number';
-      result.className = 'invalid';
+      result.textContent = "Please enter a card number";
+      result.className = "invalid";
       resetLogos(logos);
       return;
     }
@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const system = getCardSystem(value);
     highlightLogo(logos, system);
 
-    result.textContent = isValid ? 'Valid' : 'Invalid';
-    result.className = isValid ? 'valid' : 'invalid';
+    result.textContent = isValid ? "Valid" : "Invalid";
+    result.className = isValid ? "valid" : "invalid";
   });
 
-  input.addEventListener('input', () => {
+  input.addEventListener("input", () => {
     const value = input.value.trim();
     if (value) {
       const system = getCardSystem(value);
